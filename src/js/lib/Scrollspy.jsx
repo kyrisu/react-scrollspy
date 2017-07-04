@@ -13,6 +13,7 @@ export default class Scrollspy extends React.Component {
       style: PropTypes.object,
       componentTag: PropTypes.string,
       offset: PropTypes.number,
+      offsetBottom: PropTypes.number,
       rootEl: PropTypes.string,
     }
   }
@@ -24,6 +25,7 @@ export default class Scrollspy extends React.Component {
       style: {},
       componentTag: 'ul',
       offset: 0,
+      offsetBottom: 0,
     }
   }
 
@@ -127,7 +129,7 @@ export default class Scrollspy extends React.Component {
       return false
     }
 
-    const { rootEl, offset } = this.props
+    const { rootEl, offset, offsetBottom } = this.props
     let rootRect
 
     if (rootEl) {
@@ -142,7 +144,7 @@ export default class Scrollspy extends React.Component {
       rect.top + scrollTop - rootRect.top + offset
       :
       rect.top + scrollTop + offset
-    const elBottom = elTop + el.offsetHeight
+    const elBottom = elTop + el.offsetHeight - offsetBottom
 
     return (elTop < scrollBottom) && (elBottom > scrollTop)
   }
